@@ -1,0 +1,1 @@
+# finansal_okur_yazarlik
