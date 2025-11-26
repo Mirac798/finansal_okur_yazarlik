@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sağlıklı Finans - Hayat Kurtarırken Geleceğini Kurtar</title>
+    <style>
+        /* GENEL SIFIRLAMA VE TEMEL AYARLAR */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* HEADER & NAVİGASYON */
+        header {
+            background: linear-gradient(135deg, #1e88e5 0%, #0d47a1 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* HERO BÖLÜMÜ (GİRİŞ) */
+        .hero {
+            background: linear-gradient(135deg, #1e88e5 0%, #0d47a1 100%);
+            color: white;
+            padding: 140px 2rem 80px; /* Mobilde taşmayı önlemek için üst padding arttırıldı */
+            text-align: center;
+            /* margin-top sildim çünkü padding hallediyor */
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero .motto {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .cta-button {
+            background: white;
+            color: #1e88e5;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1s ease 0.9s both;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* İSTATİSTİK BÖLÜMÜ */
+        .stats {
+            background: #f5f5f5;
+            padding: 60px 2rem;
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            color: #1e88e5;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        /* SORUNLAR BÖLÜMÜ */
+        .problems {
+            padding: 80px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #1e88e5;
+            margin-bottom: 3rem;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .problem-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 4px solid #1e88e5;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .problem-card h3 {
+            color: #1e88e5;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .problem-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* ÇÖZÜMLER BÖLÜMÜ */
+        .solutions {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 80px 2rem;
+        }
+
+        .solution-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .solution-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .solution-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+
+        .solution-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .solution-card h3 {
+            color: #1e88e5;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* EĞİTİM İÇERİĞİ */
+        .education {
+            padding: 80px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tip-card {
+            background: #f9f9f9;
+            padding: 2rem;
+            border-radius: 10px;
+            border-top: 4px solid #1e88e5;
+        }
+
+        .tip-number {
+            background: #1e88e5;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .tip-card h3 {
+            color: #1e88e5;
+            margin-bottom: 1rem;
+        }
+
+        .tip-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .tip-card li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .tip-card li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #1e88e5;
+            font-weight: bold;
+        }
+
+        /* BAŞARI HİKAYESİ */
+        .success-story {
+            background: #1e88e5;
+            color: white;
+            padding: 80px 2rem;
+        }
+
+        .story-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .story-quote {
+            font-size: 1.5rem;
+            font-style: italic;
+            line-height: 1.8;
+            margin: 2rem 0;
+        }
+
+        .story-author {
+            font-size: 1.2rem;
+            margin-top: 2rem;
+            opacity: 0.9;
+        }
+
+        /* CTA (KAYIT) BÖLÜMÜ */
+        .cta-section {
+            background: linear-gradient(135deg, #0d47a1 0%, #1e88e5 100%);
+            color: white;
+            padding: 80px 2rem;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .benefits-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .benefit-item {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 10px;
+        }
+
+        .benefit-item:before {
+            content: "✓";
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #263238;
+            color: white;
+            padding: 40px 2rem 20px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #1e88e5;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            padding: 0.3rem 0;
+        }
+
+        .footer-section a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: #1e88e5;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            transition: transform 0.3s;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #999;
+        }
+
+        /* VİDEO BÖLÜMÜ */
+        .video-section {
+            padding: 80px 2rem;
+            background: #f9f9f9;
+        }
+
+        .video-container-section {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .video-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+
+        .video-content {
+            padding: 1rem;
+        }
+
+        .video-card h3 {
+            padding: 0.5rem 0;
+            color: #1e88e5;
+            font-size: 1.2rem;
+        }
+
+        .video-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* ANİMASYONLAR */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ========================================= */
+        /* MOBİL UYUMLULUK AYARLARI (RESPONSIVE CSS) */
+        /* ========================================= */
+        @media (max-width: 768px) {
+            
+            /* Menü Düzenlemesi: Alt alta sırala */
+            nav {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .logo {
+                margin-bottom: 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+                width: 100%;
+                padding: 0;
+            }
+
+            /* Yazı Boyutlarını Küçültme */
+            .hero h1 { font-size: 2rem; }
+            .hero .motto { font-size: 1.4rem; }
+            .section-title { font-size: 2rem; }
+            .stat-number { font-size: 2.5rem; }
+
+            /* Boşlukları (Padding) Azaltma: Mobilde yer tasarrufu */
+            .hero, .stats, .problems, .solutions, .video-section, .education, .cta-section, footer, .success-story {
+                padding-top: 40px !important;
+                padding-bottom: 40px !important;
+                padding-left: 1.5rem !important;
+                padding-right: 1.5rem !important;
+            }
+
+            /* Grid Yapılarını Tek Sütuna İndirme (Zorunlu) */
+            .video-grid, .problem-grid, .solution-grid, .tips-grid, .footer-content, .stats-container, .benefits-list {
+                grid-template-columns: 1fr !important; /* Yan yana değil alt alta olsun */
+                gap: 2rem;
+            }
+            
+            /* Inline style'daki grid ayarını ezmek için video grid'e özel */
+            #video-akademi .video-grid {
+                display: grid !important;
+                grid-template-columns: 1fr !important;
+            }
+
+            /* Modal (Form) Düzenlemesi */
+            #registrationModal > div {
+                width: 90% !important;
+                margin: 20px auto !important;
+                padding: 1.5rem !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                🏥 Sağlıklı Finans
+            </div>
+            <ul class="nav-links">
+                <li><a href="#ana-sayfa">Ana Sayfa</a></li>
+                <li><a href="#sorunlar">Sorunlar</a></li>
+                <li><a href="#cozumler">Çözümler</a></li>
+                <li><a href="#egitim">Eğitim</a></li>
+                <li><a href="#kayit">Kayıt Ol</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="ana-sayfa" class="hero">
+        <h1>💙 Sağlık Çalışanlarına Özel Finansal Platform</h1>
+        <p class="motto">"Hayat Kurtarırken Geleceğini Kurtar: Sağlıklı Finans, Sağlıklı Yaşam"</p>
+        <p>Vardiyalı çalışma düzeninize uygun, pratik ve etkili finansal çözümlerle geleceğinizi güvence altına alın.</p>
+        <a href="#kayit" class="cta-button">Ücretsiz Kayıt Ol</a>
+    </section>
+
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stat-box">
+                <div class="stat-number">67%</div>
+                <div class="stat-label">Sağlık çalışanı düzenli birikim yapamıyor</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">42%</div>
+                <div class="stat-label">Kredi kartı borcu taşıyor</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">58%</div>
+                <div class="stat-label">Emeklilik planı yok</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">71%</div>
+                <div class="stat-label">Finansal stres yaşıyor</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="sorunlar" class="problems">
+        <h2 class="section-title">🔍 Sağlık Çalışanlarının Finansal Zorlukları</h2>
+        <div class="problem-grid">
+            <div class="problem-card">
+                <div class="problem-icon">⏰</div>
+                <h3>Vardiyalı Çalışma</h3>
+                <p>Düzensiz mesai saatleri ve gece vardiyaları nedeniyle finansal planlama için zaman bulamama</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">💰</div>
+                <h3>Düzensiz Gelir</h3>
+                <p>Nöbet ücretleri ve ek ödemelerin farklı zamanlarda gelmesi bütçe yönetimini zorlaştırıyor</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">😰</div>
+                <h3>Yüksek Stres</h3>
+                <p>Yoğun iş temposu ve duygusal yük, finansal konularda sağlıklı karar almayı engelliyor</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">💳</div>
+                <h3>Borç Yükü</h3>
+                <p>Acil ihtiyaçlar için kullanılan kredi kartları ve tüketici kredileri birikmeye engel oluyor</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">📉</div>
+                <h3>Yetersiz Birikim</h3>
+                <p>Acil durum fonu ve emeklilik birikimi oluşturmak için kaynak ayrılamıyor</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">❓</div>
+                <h3>Bilgi Eksikliği</h3>
+                <p>Finansal okuryazarlık eğitimi almadıkları için doğru yatırım araçlarını bilmiyorlar</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="cozumler" class="solutions">
+        <h2 class="section-title">✨ Bizim Çözümlerimiz</h2>
+        <div class="solution-grid">
+            <div class="solution-card">
+                <div class="solution-icon">📊</div>
+                <h3>Vardiyaya Özel Bütçe</h3>
+                <p>50/30/20 kuralını vardiyalı çalışma düzeninize uyarlayın. Nöbet ücretlerinizi akıllıca planlayın.</p>
+            </div>
+            <div class="solution-card">
+                <div class="solution-icon">🤖</div>
+                <h3>Otomatik Tasarruf</h3>
+                <p>Dijital bankacılık araçlarıyla gelir gelir gelmez otomatik tasarruf yapın. Düşünmeden biriktirin!</p>
+            </div>
+            <div class="solution-card">
+                <div class="solution-icon">🎓</div>
+                <h3>Ücretsiz Eğitimler</h3>
+                <p>Uzman eğitmenlerden canlı seminerler, webinarlar ve interaktif atölyelerle öğrenin.</p>
+            </div>
+            <div class="solution-card">
+                <div class="solution-icon">💼</div>
+                <h3>Emeklilik Planı</h3>
+                <p>BES ve diğer emeklilik araçlarıyla geleceğinizi güvence altına alın. Devlet katkısından yararlanın.</p>
+            </div>
+            <div class="solution-card">
+                <div class="solution-icon">📱</div>
+                <h3>Dijital Araçlar</h3>
+                <p>Mobil uygulamalar ve araçlarla 24/7 bütçenizi takip edin, harcamalarınızı kontrol altında tutun.</p>
+            </div>
+            <div class="solution-card">
+                <div class="solution-icon">🤝</div>
+                <h3>Bireysel Danışmanlık</h3>
+                <p>Size özel finansal durum analizleri ve ücretsiz birebir danışmanlık hizmeti alın.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="video-section">
+        <div class="video-container-section">
+            <h2 class="section-title">🎥 Eğitim Videoları</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; font-size: 1.1rem;">
+                Finansal okuryazarlık yolculuğunuzda size rehberlik edecek kısa ve öğretici videolarımızı izleyin.
+            </p>
+            <section id="video-akademi">
+       
+        <style>
+            .fake-player {
+                position: relative;
+                display: block;
+                overflow: hidden;
+                border-radius: 15px 15px 0 0;
+            }
+            .fake-player img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.3s;
+                display: block;
+            }
+            .play-icon {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 60px;
+                height: 60px;
+                background-color: rgba(255, 0, 0, 0.85); /* YouTube Kırmızısı */
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 24px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+                transition: all 0.3s;
+            }
+            /* Üzerine gelince efekt */
+            .video-card:hover .play-icon {
+                transform: translate(-50%, -50%) scale(1.1);
+                background-color: #ff0000;
+            }
+            .video-card:hover img {
+                transform: scale(1.05);
+            }
+        </style>
+
+        <div class="video-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto;">
+            
+            <div class="video-card">
+                <a href="https://www.youtube.com/watch?v=fDhk9t-DumI" target="_blank" class="fake-player">
+                    <img src="https://img.youtube.com/vi/fDhk9t-DumI/hqdefault.jpg" alt="Video Kapak">
+                    <div class="play-icon">▶</div>
+                </a>
+                <div class="video-content">
+                    <h3>💼 Finansal Okuryazarlık Nedir?</h3>
+                    <p>Düzensiz gelir akışınızı nasıl yönetebileceğinizi öğrenin. Temel kavramlar ve bütçe yönetimi.</p>
+                    <div style="margin-top: 10px; font-size: 0.9rem; color: #666;">⏱️ 10 dakika</div>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <a href="https://www.youtube.com/watch?v=npFKRCFMTIM" target="_blank" class="fake-player">
+                    <img src="https://img.youtube.com/vi/npFKRCFMTIM/hqdefault.jpg" alt="Video Kapak">
+                    <div class="play-icon">▶</div>
+                </a>
+                <div class="video-content">
+                    <h3>💰 Finansal Okuryazarlık Nasıl Elde Edilir?</h3>
+                    <p>Ben Nasıl Büyük Adam Olucam’ın yeni bölümünde Prof. Dr. Emre Alkin ile finansal okuryazarlık konusunu inceliyoruz! 💰📊</p>
+                    <div style="margin-top: 10px; font-size: 0.9rem; color: #666;">⏱️ 10 dakika</div>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <a href="https://www.youtube.com/watch?v=zO9hT8O9aTw" target="_blank" class="fake-player">
+                    <img src="https://img.youtube.com/vi/KV1jQeoC1ko/hqdefault.jpg" alt="Video Kapak">
+                    <div class="play-icon">▶</div>
+                </a>
+                <div class="video-content">
+                    <h3> Finansal Okuryazarlık Neden Önemlidir?</h3>
+                    <p>Prof. Dr. Korhan Gökmenoğlu ile finansal okuryazarlığın önemi, dolandırıcılardan korunma yolları ve yatırıma başlama yaşı üzerine kapsamlı bir rehber.</p>
+                    <div style="margin-top: 10px; font-size: 0.9rem; color: #666;">⏱️ 32 dakika</div>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <a href="https://www.youtube.com/watch?v=9NJOKe7q1rU" target="_blank" class="fake-player">
+                    <img src="https://img.youtube.com/vi/9NJOKe7q1rU/hqdefault.jpg" alt="Video Kapak">
+                    <div class="play-icon">▶</div>
+                </a>
+                <div class="video-content">
+                    <h3>Finansal Özgürlük Nedir, Nasıl Kazanılır</h3>
+                    <p>Borçluluktan finansal özgürlüğe giden 4 aşama nedir? "25 Kat Kuralı" ile emeklilik için gereken rakamı nasıl hesaplarsınız?</p>
+                    <div style="margin-top: 10px; font-size: 0.9rem; color: #666;">⏱️ 14 dakika</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    </div>
+    </section>
+
+    <section id="egitim" class="education">
+        <h2 class="section-title">📚 Size Özel 6 Finansal İpucu</h2>
+        <div class="tips-grid">
+            <div class="tip-card">
+                <div class="tip-number">1</div>
+                <h3>💸 Vardiya Bütçesi Oluşturun</h3>
+                <ul>
+                    <li>Her nöbet ücreti geldiğinde %20'sini otomatik tasarrufa ayırın</li>
+                    <li>Düzenli maaş ve ek gelirleri farklı hesaplarda tutun</li>
+                    <li>Aylık sabit giderlerinizi düzenli maaştan karşılayın</li>
+                    <li>Nöbet ücretlerini yatırım ve acil fon için kullanın</li>
+                </ul>
+            </div>
+            <div class="tip-card">
+                <div class="tip-number">2</div>
+                <h3>🚨 Acil Durum Fonu Yaratın</h3>
+                <ul>
+                    <li>3-6 aylık giderinizi karşılayacak fon oluşturun</li>
+                    <li>Bu parayı kolay erişilebilir ama ayrı bir hesapta tutun</li>
+                    <li>Beklenmedik sağlık giderleri için hazırlıklı olun</li>
+                    <li>Araç tamiri, ev onarımı gibi acil durumlar için</li>
+                </ul>
+            </div>
+            <div class="tip-card">
+                <div class="tip-number">3</div>
+                <h3>🏦 BES'e Katılın</h3>
+                <ul>
+                    <li>Bireysel Emeklilik Sistemi'nden %25 devlet katkısı alın</li>
+                    <li>Erken başlamak büyük fark yaratır (bileşik faiz)</li>
+                    <li>Aylık 500 TL bile uzun vadede büyük birikim sağlar</li>
+                    <li>Vergi avantajlarından yararlanın</li>
+                </ul>
+            </div>
+            <div class="tip-card">
+                <div class="tip-number">4</div>
+                <h3>💳 Borçlarınızı Önceliklendirin</h3>
+                <ul>
+                    <li>Yüksek faizli borçları (kredi kartı) önce ödeyin</li>
+                    <li>Kredi kartını taksit yerine tam ödeme için kullanın</li>
+                    <li>Mümkünse ek nöbet yaparak borçları erken kapatın</li>
+                    <li>Yeni borç almadan önce iki kez düşünün</li>
+                </ul>
+            </div>
+            <div class="tip-card">
+                <div class="tip-number">5</div>
+                <h3>📲 Dijital Araçları Kullanın</h3>
+                <ul>
+                    <li>Bütçe takip uygulamaları indirin (ücretsiz seçenekler mevcut)</li>
+                    <li>Otomatik ödeme talimatları verin (fatura gecikmeleri önleyin)</li>
+                    <li>Harcama bildirimlerini açın (kontrolü kaybetmeyin)</li>
+                    <li>Yatırım uygulamalarıyla küçük miktarlarla başlayın</li>
+                </ul>
+            </div>
+            <div class="tip-card">
+                <div class="tip-number">6</div>
+                <h3>🎯 50/30/20 Kuralını Uygulayın</h3>
+                <ul>
+                    <li>Gelirinizin %50'si: Zorunlu giderler (kira, fatura, yemek)</li>
+                    <li>%30'u: İstekler (eğlence, hobi, tatil)</li>
+                    <li>%20'si: Tasarruf ve borç ödeme</li>
+                    <li>Vardiya düzeninize göre bu oranları ayarlayın</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="success-story">
+        <div class="story-container">
+            <h2 class="section-title" style="color: white;">💬 Başarı Hikayesi</h2>
+            <p class="story-quote">
+                "10 yıldır hemşireyim. Bu programa katılmadan önce maaş gününü iple çekerdim. 
+                Kredi kartı borçlarım vardı ve hiç birikimim yoktu. Şimdi acil durum fonumda 6 aylık 
+                birikimim var ve BES'te düzenli katkı yapıyorum. En önemlisi, artık finansal stres yaşamıyorum! 
+                Nöbet ücretlerimi değerlendirmeyi öğrendim ve ilk defa tatile çıkabilecek param oldu."
+            </p>
+            <p class="story-author">
+                <strong>— Zeynep K., Hemşire, 32 yaş</strong><br>
+                Ankara Şehir Hastanesi
+            </p>
+        </div>
+    </section>
+
+    <section id="kayit" class="cta-section">
+        <div class="cta-content">
+            <h2>🎉 Ücretsiz Programa Katılın!</h2>
+            <p>İlk 100 katılımcıya özel hediyeler ve 1 yıllık ücretsiz dijital bütçe uygulaması!</p>
+            
+            <div class="benefits-list">
+                <div class="benefit-item">Ücretsiz Eğitim Seminerleri</div>
+                <div class="benefit-item">Finansal Planlama Ajandası</div>
+                <div class="benefit-item">Bireysel Danışmanlık (30 dk)</div>
+                <div class="benefit-item">Dijital Bütçe Uygulaması</div>
+                <div class="benefit-item">Özel WhatsApp Destek Grubu</div>
+                <div class="benefit-item">Aylık Webinar Erişimi</div>
+            </div>
+
+            <button class="cta-button" onclick="showRegistrationForm()">
+                Hemen Kayıt Ol - Tamamen Ücretsiz!
+            </button>
+
+            <div id="registrationModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; overflow-y: auto;">
+                <div style="background: white; max-width: 600px; margin: 50px auto; padding: 2rem; border-radius: 15px; position: relative;">
+                    <button onclick="closeRegistrationForm()" style="position: absolute; top: 15px; right: 15px; background: #ff5252; color: white; border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; font-weight: bold;">×</button>
+                    
+                    <h2 style="color: #1e88e5; margin-bottom: 1.5rem; text-align: center;">📝 Ücretsiz Programa Kayıt</h2>
+                    
+                    <form id="registrationForm" onsubmit="handleRegistration(event)" style="display: flex; flex-direction: column; gap: 1rem; text-align: left;">
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: bold;">Ad Soyad *</label>
+                            <input type="text" required style="width: 100%; padding: 0.8rem; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem;" placeholder="Adınızı ve soyadınızı girin">
+                        </div>
+                        
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: bold;">E-posta *</label>
+                            <input type="email" required style="width: 100%; padding: 0.8rem; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem;" placeholder="ornek@email.com">
+                        </div>
+                        
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: bold;">Telefon *</label>
+                            <input type="tel" required style="width: 100%; padding: 0.8rem; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem;" placeholder="0500 123 45 67">
+                        </div>
+                        
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: bold;">Mesleğiniz *</label>
+                            <select required style="width: 100%; padding: 0.8rem; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem;">
+                                <option value="">Seçiniz...</option>
+                                <option value="hemsire">Hemşire</option>
+                                <option value="ebe">Ebe</option>
+                                <option value="paramedik">Paramedik</option>
+                                <option value="saglik-teknisyeni">Sağlık Teknisyeni</option>
+                                <option value="hasta-bakici">Hasta Bakıcı</option>
+                                <option value="diger">Diğer Sağlık Çalışanı</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: bold;">Çalıştığınız Kurum</label>
+                            <input type="text" style="width: 100%; padding: 0.8rem; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem;" placeholder="Hastane veya kurum adı">
+                        </div>
+                        
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; color: #333; font-weight: bold;">İlgilendiğiniz Eğitimler (Birden fazla seçebilirsiniz)</label>
+                            <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem;">
+                                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <input type="checkbox" value="butce"> Bütçe Planlama Atölyesi
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <input type="checkbox" value="yatirim"> Yatırım Okuryazarlığı
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <input type="checkbox" value="emeklilik"> Emeklilik Planlaması
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <input type="checkbox" value="borc"> Borç Yönetimi
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" style="background: linear-gradient(135deg, #1e88e5 0%, #0d47a1 100%); color: white; padding: 1rem; font-size: 1.1rem; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; margin-top: 1rem; transition: transform 0.3s;">
+                            Kayıt Ol
+                        </button>
+                    </form>
+                    
+                    <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem; color: #666;">
+                        * İşaretli alanlar zorunludur
+                    </p>
+                </div>
+            </div>
+
+            <script>
+                function showRegistrationForm() {
+                    document.getElementById('registrationModal').style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                }
+
+                function closeRegistrationForm() {
+                    document.getElementById('registrationModal').style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+
+                function handleRegistration(event) {
+                    event.preventDefault();
+                    alert('Tebrikler! Kayıt başarıyla alındı. En kısa sürede sizinle iletişime geçeceğiz.\n\nE-posta adresinize detaylı bilgi gönderilecektir.');
+                    closeRegistrationForm();
+                    document.getElementById('registrationForm').reset();
+                }
+
+                // Modal dışına tıklanınca kapat
+                document.getElementById('registrationModal').addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        closeRegistrationForm();
+                    }
+                });
+            </script>
+
+            <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.9;">
+                📧 info@sagliklifinans.com | 📱 0850 XXX XX XX<br>
+                İlk seminer: 15 Ocak 2026 | Şehir Hastanesi Konferans Salonu
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Sağlıklı Finans</h3>
+                <p>Sağlık çalışanlarının finansal refahı için çalışıyoruz.</p>
+                <div class="social-links">
+                    <a href="#">📘</a>
+                    <a href="#">📷</a>
+                    <a href="#">🐦</a>
+                    <a href="#">💼</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Hızlı Linkler</h3>
+                <ul>
+                    <li><a href="#ana-sayfa">Ana Sayfa</a></li>
+                    <li><a href="#sorunlar">Sorunlar</a></li>
+                    <li><a href="#cozumler">Çözümler</a></li>
+                    <li><a href="#egitim">Eğitim</a></li>
+                    <li><a href="#kayit">Kayıt Ol</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Eğitim Programları</h3>
+                <ul>
+                    <li><a href="#egitim">Bütçe Planlama Atölyesi</a></li>
+                    <li><a href="#egitim">Yatırım Okuryazarlığı</a></li>
+                    <li><a href="#egitim">Emeklilik Planlaması</a></li>
+                    <li><a href="#egitim">Borç Yönetimi</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>İletişim</h3>
+                <ul>
+                    <li>📧 info@sagliklifinans.com</li>
+                    <li>📱 0850 XXX XX XX</li>
+                    <li>📍 Ankara, Türkiye</li>
+                    <li>🕐 Pzt-Cum: 09:00-18:00</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2026 Sağlıklı Finans Platform. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+</body>
+</html>
